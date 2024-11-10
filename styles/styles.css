@@ -14,30 +14,49 @@ body {
 }
 .digital-clock {
   position: relative;
-  z-index: 50;
+  z-index: 10;
   font-family: monospace;
   font-size: 90px;
   font-weight: bold;
   text-align: center;
-  background: white;
+  background: transparent;
   color: rgb(87, 83, 105);
   backdrop-filter: blur(5px);
 }
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 .digital-clock::after {
   content: "";
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: conic-gradient(
-    rgb(73, 240, 73),
-    rgb(210, 61, 160),
+  background: conic-gradient(
+    from var(--angle) rgb(132, 10, 232),
+    rgb(14, 121, 221),
     rgb(105, 157, 175),
-    rgb(151, 231, 31)
+    rgb(224, 17, 197)
   );
   top: 50%;
   left: 50%;
   translate: -50% -50%;
-  z-index: -50;
+  z-index: -10;
   padding: 3px;
   border-radius: 5px;
+  animation: 3s spin linear infinite;
+}
+.digital-clock::before {
+  filter: blur(1 rem);
+  opacity: 0.5;
+}
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
 }
